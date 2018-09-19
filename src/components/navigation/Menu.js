@@ -54,12 +54,13 @@ class Menu extends React.Component {
 
         > .button {
           //background-color: yellow;
-          background-color: ${props => props.theme.main};
-          height: 5.8rem;
-          width: 5.8rem;
+          //background-color: ${props => props.theme.main};
+          background-color: #872e2e;
+          height: 5.4rem;
+          width: 5.4rem;
           position: fixed;
           top: 3rem;
-          right: 3rem;
+          left: 3rem;
           border-radius: 50%;
           z-index: 2000;
           box-shadow: 0 1rem 3rem rgba(${props => props.theme.main}, 0.1);
@@ -80,7 +81,7 @@ class Menu extends React.Component {
             &:after {
               width: 3rem;
               height: 1px;
-              background-color: #333;
+              background-color: white;
               display: inline-block;
             }
 
@@ -102,17 +103,18 @@ class Menu extends React.Component {
         }
 
         > .background {
-          height: 5.6rem;
-          width: 5.6rem;
+          height: 5.4rem;
+          width: 5.4rem;
           border-radius: 50%;
           position: fixed;
           top: 3rem;
-          right: 3rem;
-          background-image: linear-gradient(
-            to bottom left,
+          left: 3rem;
+          /* background-image: linear-gradient(
+            to bottom right,
             black 75%,
             ${props => props.theme.main} 25%
-          );
+          ); */
+          background-color: black;
           z-index: 1000;
           transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
         }
@@ -121,7 +123,7 @@ class Menu extends React.Component {
           height: 100vh;
           position: fixed;
           top: 0;
-          right: 0;
+          left: 0;
           z-index: 1500;
 
           opacity: 0;
@@ -208,11 +210,12 @@ class Menu extends React.Component {
         }
         > .checkbox:checked + .button > .icon:before {
           top: 0;
-          transform: rotate(135deg);
+          transform: rotate(135deg) scale(10,1);
+          /* transform: scale(4); */
         }
         > .checkbox:checked + .button > .icon:after {
           top: 0;
-          transform: rotate(-135deg);
+          transform: rotate(-90deg) scale(calc(${this.state.height} / 10), 1);
         }
       }
     `;
