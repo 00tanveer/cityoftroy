@@ -59,8 +59,8 @@ class Menu extends React.Component {
           height: 5.4rem;
           width: 5.4rem;
           position: fixed;
-          top: 3rem;
-          left: 3rem;
+          top: 3vh;
+          left: calc(${this.state.height}px / 27);
           border-radius: 50%;
           z-index: 2000;
           box-shadow: 0 1rem 3rem rgba(${props => props.theme.main}, 0.1);
@@ -116,7 +116,7 @@ class Menu extends React.Component {
           ); */
           background-color: black;
           z-index: 1000;
-          transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+          transition: transform 0.1s cubic-bezier(.01,.69,.83,.67);
         }
 
         > .navi {
@@ -128,8 +128,8 @@ class Menu extends React.Component {
 
           opacity: 0;
           width: 0;
-          transition: all 0.8s;
-          transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+          transition: all 0.1s;
+          transition: all 0.3s cubic-bezier(.01,.69,.83,.67);
 
           > .list_ {
             position: absolute;
