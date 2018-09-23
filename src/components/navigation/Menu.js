@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { Link } from "react-router-dom";
-
+import theme from "../../styles/theme";
 class Menu extends React.Component {
   constructor() {
     super();
@@ -42,9 +42,9 @@ class Menu extends React.Component {
   render() {
     //console.log(window.innerWidth);
 
-    const theme = {
-      main: "white"
-    };
+    // const theme = {
+    //   main: "white"
+    // };
 
     const StyledLol = styled.div`
       > .navigation {
@@ -55,7 +55,7 @@ class Menu extends React.Component {
         > .button {
           //background-color: yellow;
           //background-color: ${props => props.theme.main};
-          background-color: #872e2e;
+          background-color: ${props => props.theme.maroon};
           height: 5.4rem;
           width: 5.4rem;
           position: fixed;
@@ -63,7 +63,7 @@ class Menu extends React.Component {
           left: calc(${this.state.height}px / 27);
           border-radius: 50%;
           z-index: 2000;
-          box-shadow: 0 1rem 3rem rgba(${props => props.theme.main}, 0.1);
+          box-shadow: 0 1rem 3rem rgba(${props => props.theme.maroon}, 0.1);
           text-align: center;
           cursor: pointer;
 
@@ -81,7 +81,7 @@ class Menu extends React.Component {
             &:after {
               width: 3rem;
               height: 1px;
-              background-color: white;
+              background-color: ${props => props.theme.white};
               display: inline-block;
             }
 
@@ -152,15 +152,15 @@ class Menu extends React.Component {
                   font-weight: 100;
                   padding: 1rem 2rem;
                   width: 33rem;
-                  color: white;
-                  text-shadow: 0 0 3px white;
+                  color: ${props => props.theme.white};
+                  text-shadow: 0 0 3px ${props => props.theme.white};
                   text-decoration: none;
                   text-transform: uppercase;
                   background-image: linear-gradient(
                     110deg,
                     transparent 0%,
                     transparent 50%,
-                    ${props => props.theme.main} 50%
+                    ${props => props.theme.white} 50%
                   );
                   clip-path: polygon(10% 0%, 100% 0, 90% 100%, 0% 100%);
                   background-size: 240%;

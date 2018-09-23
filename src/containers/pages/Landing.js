@@ -1,6 +1,7 @@
 import React from "react";
 import Menu from "../../components/navigation/Menu";
 import styled from "styled-components";
+import theme from "../../styles/theme";
 
 const H2 = styled.h2`
   position: absolute;
