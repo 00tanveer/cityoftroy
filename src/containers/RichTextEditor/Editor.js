@@ -205,7 +205,6 @@ class Editor extends React.Component {
           image: this.imageHandler
         }
       },
-      syntax: true,
       clipboard: {
         matchVisual: false
       }

@@ -7,15 +7,15 @@ const Button = props => {
   const Button = styled.button`
     display: block;
     margin: 0 auto;
-    color: ${props => props.theme.white};
-    background-color: black;
+    color: ${theme.white};
+    background-color: ${theme.maroon};
     border: 1px solid ${props => props.theme.white};
     border-radius: 3px;
     font-size: 2rem;
     padding: 1rem;
     &:hover {
-      background-color: ${props => props.theme.white};
-      color: black;
+      background-color: ${theme.black};
+      color: ${theme.white};
     }
   `;
   const LinkButton = Button.withComponent(Link);
