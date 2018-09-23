@@ -5,6 +5,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import { injectGlobal } from "styled-components";
 import { Router } from "react-router-dom";
 import history from "./history";
+import theme from "./styles/theme";
 
 injectGlobal`
 	*,
@@ -15,7 +16,7 @@ injectGlobal`
 		box-sizing: inherit;
 	}
 	html{
-		background-color: black;
+		background-color: ${theme.black};
 		
 		font-size: 62.5%;
 		color: black;
@@ -27,9 +28,9 @@ injectGlobal`
 `;
 
 ReactDOM.render(
-	<Router history={history}>
-		<App />
-	</Router>,
-	document.getElementById("root")
+  <Router history={history}>
+    <App />
+  </Router>,
+  document.getElementById("root")
 );
 registerServiceWorker();
