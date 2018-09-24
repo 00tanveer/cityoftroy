@@ -7,7 +7,8 @@ const Input = props => {
 			margin: 0 auto;
     `
     return (
-			<Input />
+			<Input 
+				placeholder/>
     );
 }
 
