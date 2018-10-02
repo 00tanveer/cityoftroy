@@ -26,6 +26,9 @@ const SearchBar = () => {
                     margin-left: 5px;
                     font-size: 20px;
                     line-height: 1.4;
+                    &:focus {
+                        outline: none;
+                    }
                 }
             }
         }
