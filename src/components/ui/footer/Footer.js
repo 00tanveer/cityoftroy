@@ -6,7 +6,7 @@ const Footer = (props) => {
     const Tab = styled.div`
         .footer {
             position: fixed;
-            bottom: 0;
+            bottom: 20px;
             width: 100vw;
             height: 10vh;
             display: flex;
