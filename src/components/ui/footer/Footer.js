@@ -13,13 +13,13 @@ const Footer = (props) => {
             justify-content: center;
             .fa-instagram {
                 color: white;
-                font-size: 3vw;
+                font-size: 4rem;
                 margin: 2vw;
                 text-shadow: 0 0 10px white;
             }
             .fa-facebook {
                 color: white;
-                font-size: 3vw;
+                font-size: 4rem;
                 margin: 2vw;
                 text-shadow: 0 0 3px white;
             }

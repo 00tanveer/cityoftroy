@@ -8,22 +8,24 @@ const SearchBar = () => {
             width: 15vw;
             top: 4vh;
             right: 5px;
-            span {
-                display: flex;
-                flex-direction: row;
-                margin-right: 5px;
+            form {
+                display: block;
+                //margin-right: 5px;
                 .fa-search {
+                    display: inline-block;
                     color: white;
-                    font-size: 3vw;
+                    font-size: 3rem;
                 }
                 input {
+                    display: inline-block;
                     background-color: black;
                     color: white;
                     border: none;
+                    background: none;
                     width: 11vw;
                     margin-left: 5px;
                     font-size: 20px;
-                    line-height: 2;
+                    line-height: 1.4;
                 }
             }
         }
@@ -31,14 +33,12 @@ const SearchBar = () => {
     return (
         <Bar>
             <div className="container">
-                <span>
-                    <i className="far fa-search"></i>
                     <form>
+                        <i className="far fa-search"></i>
                         <input 
-                            placeholder="SEARCH"/>
+                            placeholder="SEARCH"
+                            type="text"/>
                     </form>
-                </span>
-                
             </div>
         </Bar>
     );
