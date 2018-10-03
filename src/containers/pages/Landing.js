@@ -2,6 +2,8 @@ import React from "react";
 import Menu from "../../components/navigation/Menu";
 import styled from "styled-components";
 import theme from "../../styles/theme";
+import Footer from '../../components/ui/footer/Footer';
+import SearchBar from '../../components/ui/search_bar/SearchBar';
 
 const H2 = styled.h2`
   position: absolute;
@@ -9,7 +11,7 @@ const H2 = styled.h2`
   left: 50%;
   transform: translate(-50%, 50%);
   color: white;
-  font-family: "Lato", sans-serif;
+  font-family: "Great Vibes", cursive;
   font-weight: 300;
   text-shadow: 0 0 3px white;
   font-size: 4rem;
@@ -50,9 +52,11 @@ class Landing extends React.Component {
     //console.log(isAuthenticated());
     return (
       <div style={{ position: "relative" }}>
-        <H2>Hello Troy &lt;3</H2>
+        <H2>City of Troy</H2>
         <H3>Visit this link from time to time. You'll see updates here. :)</H3>
         <Menu />
+        <SearchBar />
+        <Footer />
       </div>
     );
   }
