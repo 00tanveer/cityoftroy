@@ -2,6 +2,8 @@ import React from "react";
 import Menu from "../../components/navigation/Menu";
 import styled from "styled-components";
 import theme from "../../styles/theme";
+import Footer from '../../components/ui/footer/Footer';
+import SearchBar from '../../components/ui/search_bar/SearchBar';
 
 const H2 = styled.h2`
   position: absolute;
@@ -53,6 +55,8 @@ class Landing extends React.Component {
         <H2>City of Troy</H2>
         <H3>Visit this link from time to time. You'll see updates here. :)</H3>
         <Menu />
+        <SearchBar />
+        <Footer />
       </div>
     );
   }
