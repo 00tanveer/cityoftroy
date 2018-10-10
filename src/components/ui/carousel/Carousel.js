@@ -33,7 +33,7 @@ const CarouselContainer = styled.div`
 			width: 100%;
 			height: 100%;
 			div {
-				position: absolute;
+				//position: absolute;
 				top: 0;
 				left: 0;
 				width: 100%;
@@ -90,7 +90,7 @@ class Carousel extends React.Component {
 	}
 	tick() {
 		let seconds = this.state.secondsElapsed + 1;
-		if (seconds === 4) {
+		if (seconds === 20) {
 			this.nextSlide();
 			this.setState({
 				secondsElapsed: 0

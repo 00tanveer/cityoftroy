@@ -56,8 +56,8 @@ class Menu extends React.Component {
           //background-color: yellow;
           //background-color: ${props => props.theme.main};
           background-color: ${props => props.theme.maroon};
-          height: 5.4rem;
-          width: 5.4rem;
+          height: 5rem;
+          width: 5rem;
           position: fixed;
           top: 3vh;
           left: calc(${this.state.height}px / 27);
@@ -74,12 +74,12 @@ class Menu extends React.Component {
 
           > .icon {
             position: relative;
-            margin-top: 2.8rem;
+            margin-top: 2.5rem;
 
             &,
             &:before,
             &:after {
-              width: 3rem;
+              width: 2.7rem;
               height: 1px;
               background-color: ${props => props.theme.white};
               display: inline-block;
