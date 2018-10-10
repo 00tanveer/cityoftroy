@@ -1,6 +1,7 @@
 import React from "react";
 import Menu from "../../components/navigation/Menu";
 import styled from "styled-components";
+import theme from "../../styles/theme";
 import Footer from '../../components/ui/footer/Footer';
 import SearchBar from '../../components/ui/search_bar/SearchBar';
 import Carousel from '../../components/ui/carousel/Carousel';
