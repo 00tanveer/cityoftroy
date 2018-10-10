@@ -63,7 +63,7 @@ class Menu extends React.Component {
           left: calc(${this.state.height}px / 27);
           border-radius: 50%;
           z-index: 2000;
-          box-shadow: 0 1rem 3rem rgba(${props => props.theme.maroon}, 0.1);
+          box-shadow: 0 4px 4rem rgba(${props => props.theme.maroon}, 0.1);
           text-align: center;
           cursor: pointer;
 
@@ -107,8 +107,8 @@ class Menu extends React.Component {
           width: 5.4rem;
           border-radius: 50%;
           position: fixed;
-          top: 3rem;
-          left: 3rem;
+          /* top: 3rem;
+          left: 3rem; */
           /* background-image: linear-gradient(
             to bottom right,
             black 75%,
