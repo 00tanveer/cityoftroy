@@ -23,7 +23,7 @@ const SearchBar = () => {
                     border: none;
                     background: none;
                     width: 11vw;
-                    margin-left: 5px;
+                    margin-left: 10px;
                     font-size: 20px;
                     line-height: 1.4;
                     &:focus {

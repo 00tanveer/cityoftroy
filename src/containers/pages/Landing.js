@@ -3,6 +3,13 @@ import Menu from "../../components/navigation/Menu";
 import styled from "styled-components";
 import Footer from '../../components/ui/footer/Footer';
 import SearchBar from '../../components/ui/search_bar/SearchBar';
+import Carousel from '../../components/ui/carousel/Carousel';
+
+var slides = [
+  'https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?fit=crop&fm=jpg&h=825&q=80&w=1325',
+  'https://images.unsplash.com/photo-1445251836269-d158eaa028a6?fit=crop&fm=jpg&h=825&q=80&w=1325',
+  'https://images.unsplash.com/photo-1443926818681-717d074a57af?fit=crop&fm=jpg&h=825&q=80&w=1325'
+];
 
 const H2 = styled.h2`
   position: absolute;
@@ -16,6 +23,7 @@ const H2 = styled.h2`
   font-size: 4rem;
   text-align: center;
   letter-spacing: 1rem;
+  z-index: 2000;
 `;
 
 const H3 = styled.h3`
@@ -52,7 +60,8 @@ class Landing extends React.Component {
     return (
       <div style={{ position: "relative" }}>
         <H2>City of Troy</H2>
-        <H3>Visit this link from time to time. You'll see updates here. :)</H3>
+        {/* <H3>Visit this link from time to time. You'll see updates here. :)</H3> */}
+        <Carousel slides={slides} />
         <Menu />
         <SearchBar />
         <Footer />
