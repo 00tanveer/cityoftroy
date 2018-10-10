@@ -121,13 +121,14 @@ class Carousel extends React.Component {
 		console.log('hererere');
 		console.log(this.props.slides);
 		var style = {
-			backgroundImage: 'url(' + this.props.slides[this.state.counter]  + ')'
+			backgroundImage: 'url(' + this.props.slides[this.state.counter]  + ')',
+			backgroundPosition: 'center'
 		}
 		return(
 			<CarouselContainer>
 				<div className="carousel">
-					<div className="carousel__prev" onClick={this.prevSlide}>◀︎</div>
-					<div className="carousel__next" onClick={this.nextSlide}>▶︎</div>
+					{/* <div className="carousel__prev" onClick={this.prevSlide}>◀︎</div>
+					<div className="carousel__next" onClick={this.nextSlide}>▶︎</div> */}
 					<CSSTransitionGroup 
 						transitionName={this.state.transition} 
 						transitionEnterTimeout={1000} 
