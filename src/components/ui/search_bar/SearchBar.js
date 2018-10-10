@@ -8,6 +8,7 @@ const SearchBar = () => {
 			//width: 15vw;
 			top: 4vh;
 			right: 5px;
+			z-index: 5000;
 			.fa-search {
 				//display: inline-block;
 				color: white;
@@ -32,10 +33,12 @@ const SearchBar = () => {
 	return (
 		<Bar>
 			<span className="container">
-				<i className="far fa-search"></i>
-				<input 
-					placeholder="SEARCH"
-					type="text"/>
+				<form>
+					<i className="far fa-search"></i>
+					<input 
+						placeholder="SEARCH"
+						type="text"/>
+				</form>
 			</span>
 		</Bar>
 	);
