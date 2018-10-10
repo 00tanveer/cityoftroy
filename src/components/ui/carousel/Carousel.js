@@ -122,7 +122,8 @@ class Carousel extends React.Component {
 		console.log(this.props.slides);
 		var style = {
 			backgroundImage: 'url(' + this.props.slides[this.state.counter]  + ')',
-			backgroundPosition: 'center'
+			backgroundPosition: 'center',
+			backgroundSize: 'cover'
 		}
 		return(
 			<CarouselContainer>
