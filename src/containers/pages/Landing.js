@@ -13,8 +13,8 @@ var slides = [
 ];
 
 const H2 = styled.h2`
-  position: absolute;
-  top: 50%;
+  position: relative;
+  //top: 50%;
   left: 50%;
   transform: translate(-50%, 50%);
   color: white;
@@ -59,7 +59,7 @@ class Landing extends React.Component {
     //const { isAuthenticated } = this.props.auth;
     //console.log(isAuthenticated());
     return (
-      <div style={{ position: "relative" }}>
+      <div>
         <H2>City of Troy</H2>
         {/* <H3>Visit this link from time to time. You'll see updates here. :)</H3> */}
         <Carousel slides={slides} />

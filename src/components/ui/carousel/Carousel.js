@@ -4,8 +4,9 @@ import styled from 'styled-components';
 
 const CarouselContainer = styled.div`
 	.carousel {
-		width: 50vw;
+		width: 100vw;
 		height: 50vh;
+		margin-top: 100px;
 		overflow: hidden;
 
 		&__prev, &__next {
@@ -70,13 +71,36 @@ class Carousel extends React.Component {
 		this.state = {
 			transition: 'rotate',
 			appearTransition: true,
-			counter: 0
+			counter: 0,
+			secondsElapsed: 0
 		};
 
 		this.prevSlide = this.prevSlide.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
 	}
 
+	componentDidMount() {
+		this.timeId = setInterval(
+			() => this.tick(),
+			1000
+		);
+	}
+	componentWillUnmount() {
+		clearInterval(this.timerID);
+	}
+	tick() {
+		let seconds = this.state.secondsElapsed + 1;
+		if (seconds === 4) {
+			this.nextSlide();
+			this.setState({
+				secondsElapsed: 0
+			})
+		} else {
+			this.setState({
+				secondsElapsed: seconds
+			});
+		}
+	}
 	prevSlide() {
 		var prevSlide = this.state.counter - 1 < 0 ?
 			this.props.slides.length - 1 : this.state.counter -1;
