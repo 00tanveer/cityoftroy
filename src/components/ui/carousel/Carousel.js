@@ -5,8 +5,8 @@ import styled from 'styled-components';
 const CarouselContainer = styled.div`
 	.carousel {
 		width: 100vw;
-		height: 50vh;
-		margin-top: 100px;
+		height: 84vh;
+		margin-top: 70px;
 		overflow: hidden;
 
 		&__prev, &__next {
@@ -90,7 +90,7 @@ class Carousel extends React.Component {
 	}
 	tick() {
 		let seconds = this.state.secondsElapsed + 1;
-		if (seconds === 20) {
+		if (seconds === 4) {
 			this.nextSlide();
 			this.setState({
 				secondsElapsed: 0
