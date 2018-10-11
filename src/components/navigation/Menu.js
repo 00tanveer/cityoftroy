@@ -138,7 +138,7 @@ class Menu extends React.Component {
             transform: translate(-50%, -50%);
             list-style: none;
             text-align: center;
-            width: 100%;
+            //width: 100%;
 
             > .item {
               margin: 1rem;
@@ -185,7 +185,7 @@ class Menu extends React.Component {
 
         > .checkbox:checked ~ .background {
           //transform: scale(53);
-          transform: scale(calc(${props => props.heightOrWidth} / 24));
+          transform: scale(calc(${props => props.heightOrWidth} / 2));
           //zoom: 5;
         }
         /* > .checkbox:checked ~ .button {

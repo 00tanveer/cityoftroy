@@ -27,7 +27,7 @@ const H2 = styled.h2`
   font-size: 4rem;
   text-align: center;
   letter-spacing: 1rem;
-  z-index: 2000;
+  //z-index: 000;
 `;
 
 const H3 = styled.h3`
