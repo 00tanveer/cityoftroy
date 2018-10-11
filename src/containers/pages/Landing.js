@@ -1,10 +1,13 @@
 import React from "react";
 import Menu from "../../components/navigation/Menu";
 import styled from "styled-components";
+import Plx from 'react-plx';
+import _ from 'lodash';
 import theme from "../../styles/theme";
 import Footer from '../../components/ui/footer/Footer';
 import SearchBar from '../../components/ui/search_bar/SearchBar';
 import Carousel from '../../components/ui/carousel/Carousel';
+import Box from '../../components/ui/subscription_box/Box';
 
 var slides = [
   'https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?fit=crop&fm=jpg&h=825&q=80&w=1325',
@@ -41,6 +44,8 @@ const H3 = styled.h3`
   text-align: center;
   letter-spacing: 1rem;
 `;
+
+
 class Landing extends React.Component {
   constructor(props) {
     super(props);
@@ -48,6 +53,15 @@ class Landing extends React.Component {
       authenticated: true
     };
     // this.logout = this.logout.bind(this);
+  }
+
+  componentDidMount() {
+    // window.addEventListener('scroll', _.debounce(() => {
+    //   let el = document.getElementById('root');
+    //   console.log(el);
+    //   let minPixel = el.offsetTop;
+    //   console.log(minPixel);
+    // }, 300));
   }
   //AUTH
   // logout() {
@@ -59,10 +73,12 @@ class Landing extends React.Component {
     //const { isAuthenticated } = this.props.auth;
     //console.log(isAuthenticated());
     return (
-      <div>
+      <div className="landing_container">
         <H2>City of Troy</H2>
         {/* <H3>Visit this link from time to time. You'll see updates here. :)</H3> */}
-        <Carousel slides={slides} />
+        <Carousel slides={slides} /> 
+        <Box />
+        <div className="filler" style={{backgroundColor: 'grey', height: '100vh', width: '100vw'}}></div>
         <Menu />
         <SearchBar />
         <Footer />
