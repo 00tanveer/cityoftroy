@@ -25,7 +25,7 @@ const exampleData = [
   {
 		start: 'self',
 		end: '90vh',
-    startOffset: 200,
+    //startOffset: 200,
     duration: 150,
     properties: [
       {
