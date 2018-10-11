@@ -118,8 +118,8 @@ class Carousel extends React.Component {
 	}
 
 	render() {
-		console.log('hererere');
-		console.log(this.props.slides);
+		// console.log('hererere');
+		// console.log(this.props.slides);
 		var style = {
 			backgroundImage: 'url(' + this.props.slides[this.state.counter]  + ')',
 			backgroundPosition: 'center',
