@@ -9,26 +9,6 @@ const CarouselContainer = styled.div`
 		margin-top: 70px;
 		overflow: hidden;
 
-		&__prev, &__next {
-			cursor: pointer;
-			position: absolute;
-			background: rgba(0,0,0,0.6);
-			font-size: 32px;
-			color: white;
-			width: 60px;
-			height: 60px;
-			text-align: center;
-			line-height: 60px;
-			top: 50%;
-			margin-top: -30px;
-			z-index: 1000;
-		}
-		&__prev {
-			left: 40px;
-		}
-		&__next {
-			right: 40px;
-		}
 		&__slide {
 			width: 100%;
 			height: 100%;
@@ -42,25 +22,41 @@ const CarouselContainer = styled.div`
 			}
 		}
 	}
+	.rotate-appear {
+		filter: grayscale(100%);
+		transition: all 500ms ease-in-out;
+	}
+	.rotate-appear {
+		&.rotate-appear-active {
+			filter: grayscale(10);
+		}
+	}
 	.rotate-enter {
-		filter: hue-rotate(-180deg);
+		filter: hue-rotate(-320deg);
 		opacity: .01;
 	}
-	.rotate-enter.rotate-enter-active {
-    filter: hue-rotate(0deg);
-		opacity: 1;
-		transition: all 1000ms ease-in-out;
+	.rotate-enter {
+		&.rotate-enter-active {
+			filter: hue-rotate(0deg);
+			opacity: 1;
+			transition: all 500ms ease-in-out;
+		}
 	}
 
 	.rotate-leave {
 		filter: hue-rotate(0deg);
 		opacity: 1;
+		transform: scale(1)
 	}
 
-	.rotate-leave.rotate-leave-active {
-		filter: hue-rotate(180deg);
-		opacity: .01;
-		transition: all 1000ms ease-in-out;
+	.rotate-leave {
+		&.rotate-leave-active {
+			filter: hue-rotate(320deg);
+			opacity: .01;
+			//transform: scale(1.5);
+			transform-origin: center;
+			transition: all 500ms ease-in-out;
+		}
 	}
 `;
 
@@ -128,8 +124,8 @@ class Carousel extends React.Component {
 		return(
 			<CarouselContainer>
 				<div className="carousel">
-					{/* <div className="carousel__prev" onClick={this.prevSlide}>◀︎</div>
-					<div className="carousel__next" onClick={this.nextSlide}>▶︎</div> */}
+					<div className="carousel__prev" onClick={this.prevSlide}>◀︎</div>
+					<div className="carousel__next" onClick={this.nextSlide}>▶︎</div>
 					<CSSTransitionGroup 
 						transitionName={this.state.transition} 
 						transitionEnterTimeout={1000} 
