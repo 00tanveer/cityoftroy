@@ -8,11 +8,13 @@ import Button from '../../../components/ui/Button';
 const StyledBox = styled.div`
 	.container {
 		position: relative;
+		display: block;
 		color: white;
 		background-color: ${theme.maroon};
-		height: 80vh;
+		//height: 80vh;
 		width: 70vw;
 		margin: 100px auto 100px auto;
+		padding: 20px 0 30px 0;
 		/* display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -29,7 +31,7 @@ const StyledBox = styled.div`
 		}
 		.i2 {
 			width: 60vw;
-			position: absolute;
+			position: relative;
 			top: 13vh;
 			left: 50%;
 			transform: translate(-50%, 0);
@@ -40,9 +42,10 @@ const StyledBox = styled.div`
 		}
 		form {
 			width: 40vw;
-			height: 25vh;
-			position: absolute;
-			top: 40vh;
+			height: 30vh;
+			position: relative;
+			//top: 40vh;
+			margin-top: 130px;
 			left: 50%;
 			transform: translate(-50%, 0);
 			display: flex;
@@ -50,8 +53,11 @@ const StyledBox = styled.div`
 			justify-content: space-around;
 			input {
 				display: block;
-				line-height: 1.5;
+				padding: 10px;
 				font-size: 20px;
+			}
+			button {
+				//margin-bottom: 40px;
 			}
 		}
 	}
@@ -107,12 +113,10 @@ class Box extends React.Component {
 						<form>
 							<input 
 								className="name"
-								value="name"
 								type="text"
 								placeholder="YOUR FIRST NAME"/>
 							<input 
 								className="email"
-								value="email"
 								type="email"
 								placeholder="YOUR EMAIL" />
 							<Button label="SIGN ME UP"/>
