@@ -78,7 +78,7 @@ class Landing extends React.Component {
         {/* <H3>Visit this link from time to time. You'll see updates here. :)</H3> */}
         <Carousel slides={slides} /> 
         <Box />
-        <div className="filler" style={{backgroundColor: 'grey', height: '100vh', width: '100vw'}}></div>
+        <div className="filler" style={{backgroundColor: 'black', height: '100vh', width: '100vw'}}></div>
         <Menu />
         <SearchBar />
         <Footer />
