@@ -34,7 +34,7 @@ const SearchBar = () => {
 		<Bar>
 			<span className="container">
 				<form>
-					<i className="far fa-search"></i>
+					<i className="fa fa-search"></i>
 					<input 
 						placeholder="SEARCH"
 						type="text"/>

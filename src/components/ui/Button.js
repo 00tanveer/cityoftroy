@@ -12,7 +12,7 @@ const Button = props => {
     border: 1px solid ${props => props.theme.white};
     border-radius: 3px;
     font-size: 2rem;
-    padding: 1rem;
+    padding: 2rem;
     &:hover {
       background-color: ${theme.black};
       color: ${theme.white};
