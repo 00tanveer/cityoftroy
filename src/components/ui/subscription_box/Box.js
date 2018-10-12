@@ -54,10 +54,13 @@ const StyledBox = styled.div`
 			input {
 				display: block;
 				padding: 10px;
-				font-size: 20px;
+				font-size: 18px;
+				text-transform: uppercase;
+				letter-spacing: .1em;
 			}
 			button {
 				//margin-bottom: 40px;
+				letter-spacing: .1em;
 			}
 		}
 	}
@@ -114,7 +117,7 @@ class Box extends React.Component {
 							<input 
 								className="name"
 								type="text"
-								placeholder="YOUR FIRST NAME"/>
+								placeholder="YOUR NAME"/>
 							<input 
 								className="email"
 								type="email"
