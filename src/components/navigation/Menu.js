@@ -8,7 +8,8 @@ class Menu extends React.Component {
     this.state = {
       width: window.innerWidth,
       height: window.innerHeight,
-      take: ""
+      take: "",
+      checked: false
     };
     this.updateDimensions = this.updateDimensions.bind(this);
   }
@@ -125,7 +126,7 @@ class Menu extends React.Component {
           top: 0;
           left: 0;
           z-index: 1500;
-
+          pointer-events: none;
           opacity: 0;
           width: 0;
           transition: all 0.1s;
@@ -195,6 +196,7 @@ class Menu extends React.Component {
         > .checkbox:checked ~ .navi {
           opacity: 1;
           width: 100%;
+          pointer-events: all;
         }
         > .button:hover > .icon:before {
           //top: -1rem;
@@ -225,7 +227,8 @@ class Menu extends React.Component {
       <ThemeProvider theme={theme}>
         <StyledLol heightOrWidth={this.returnHeightOrWidth()}>
           <div className="navigation">
-            <input type="checkbox" className="checkbox" id="navi-toggle" />
+            <input 
+              type="checkbox" className="checkbox" id="navi-toggle" />
             <label htmlFor="navi-toggle" className="button">
               <span className="icon">&nbsp;</span>
             </label>
