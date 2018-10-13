@@ -12,10 +12,12 @@ const Button = props => {
     border: 1px solid ${props => props.theme.white};
     border-radius: 3px;
     font-size: 2rem;
-    padding: 2rem;
+    padding: 1.7rem;
+    transition: all 200ms ease-in;
     &:hover {
       background-color: ${theme.black};
       color: ${theme.white};
+      transform: scale(1.1);
     }
   `;
   const LinkButton = Button.withComponent(Link);
