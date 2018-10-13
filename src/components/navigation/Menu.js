@@ -57,8 +57,8 @@ class Menu extends React.Component {
           //background-color: yellow;
           //background-color: ${props => props.theme.main};
           background-color: ${props => props.theme.maroon};
-          height: 5rem;
-          width: 5rem;
+          height: 4.5rem;
+          width: 4.5rem;
           position: fixed;
           top: 3vh;
           left: calc(${this.state.height}px / 27);
@@ -75,12 +75,12 @@ class Menu extends React.Component {
 
           > .icon {
             position: relative;
-            margin-top: 2.5rem;
+            margin-top: 2.15rem;
 
             &,
             &:before,
             &:after {
-              width: 2.7rem;
+              width: 2rem;
               height: 1px;
               background-color: ${props => props.theme.white};
               display: inline-block;
@@ -104,8 +104,8 @@ class Menu extends React.Component {
         }
 
         > .background {
-          height: 5.4rem;
-          width: 5.4rem;
+          height: 5rem;
+          width: 5rem;
           border-radius: 50%;
           position: fixed;
           /* top: 3rem;
@@ -161,7 +161,7 @@ class Menu extends React.Component {
                     110deg,
                     transparent 0%,
                     transparent 50%,
-                    ${props => props.theme.white} 50%
+                    ${props => props.theme.maroon} 50%
                   );
                   clip-path: polygon(10% 0%, 100% 0, 90% 100%, 0% 100%);
                   background-size: 240%;
@@ -170,7 +170,7 @@ class Menu extends React.Component {
                 &:hover,
                 &:active {
                   background-position: 100%;
-                  color: black;
+                  color: ${props => props.theme.white};
                   transform: translateX(1rem);
                   font-weight: 300;
                 }
