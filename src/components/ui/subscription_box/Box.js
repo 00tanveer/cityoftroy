@@ -55,8 +55,19 @@ const StyledBox = styled.div`
 				display: block;
 				padding: 10px;
 				font-size: 18px;
+				color: white;
 				text-transform: uppercase;
 				letter-spacing: .1em;
+				background: none;
+				transition: all 200ms ease-in;
+				border-style: solid;
+				border-width: 0 0 0 0;
+				border-color: white;
+				transition: border-width 300ms ease-in;
+				&:focus {
+					outline: none;
+					border-width: 0 0 2px 0;
+				}
 			}
 			button {
 				//margin-bottom: 40px;

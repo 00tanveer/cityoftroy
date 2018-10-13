@@ -149,7 +149,8 @@ class Menu extends React.Component {
                 &:visited {
                   display: inline-block;
                   font-size: 3.3rem;
-                  font-family: "Lato", sans-serif;
+                  font-family: "Raleway", sans-serif;
+                  letter-spacing: .1em;
                   font-weight: 100;
                   padding: 1rem 2rem;
                   width: 33rem;
