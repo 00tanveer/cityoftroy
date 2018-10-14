@@ -1,145 +1,164 @@
-import React from 'react';
-import styled from 'styled-components';
-import Plx from 'react-plx';
-import theme from '../../../styles/theme';
+import React from "react";
+import styled from "styled-components";
+import Plx from "react-plx";
+import theme from "../../../styles/theme";
 
-import Button from '../../../components/ui/Button';
+import Underline from "../../../components/ui/Underline";
+import Button from "../../../components/ui/Button";
 
 const StyledBox = styled.div`
-	.container {
-		position: relative;
-		display: block;
-		color: white;
-		background-color: ${theme.maroon};
-		//height: 80vh;
-		width: 70vw;
-		margin: 100px auto 100px auto;
-		padding: 20px 0 30px 0;
-		/* display: flex;
+  .container {
+    position: relative;
+    display: block;
+    color: white;
+    background-color: ${theme.maroon};
+    //height: 80vh;
+    width: 70vw;
+    margin: 100px auto 100px auto;
+    padding: 20px 0 30px 0;
+    /* display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-content: center; */
-		.i1 {
-			position: absolute;
-			top: -40px;
-			left: 50%;
-			transform: translate(-50%, 0);
-			text-align: center;
-			font-family: "Great Vibes", cursive;
-			font-size: 6rem;
-			z-index: 3000;
-		}
-		.i2 {
-			width: 60vw;
-			position: relative;
-			top: 13vh;
-			left: 50%;
-			transform: translate(-50%, 0);
-			text-align: center;
-			line-height: 1.6;
-			font-family: 'Raleway', sans-serif;
-			font-size: 2.4rem;
-		}
-		form {
-			width: 40vw;
-			height: 30vh;
-			position: relative;
-			//top: 40vh;
-			margin-top: 130px;
-			left: 50%;
-			transform: translate(-50%, 0);
-			display: flex;
-			flex-direction: column;
-			justify-content: space-around;
-			input {
-				display: block;
-				padding: 10px;
-				font-size: 18px;
-				color: white;
-				text-transform: uppercase;
-				letter-spacing: .1em;
-				background: none;
-				transition: all 200ms ease-in;
-				border-style: solid;
-				border-width: 0 0 0 0;
-				border-color: white;
-				transition: border-width 300ms ease-in;
-				&:focus {
-					outline: none;
-					border-width: 0 0 2px 0;
-				}
-			}
-			button {
-				//margin-bottom: 40px;
-				letter-spacing: .1em;
-			}
-		}
-	}
+    .i1 {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      text-align: center;
+      font-family: "Great Vibes", cursive;
+      font-size: 6rem;
+      z-index: 3000;
+    }
+    .i2 {
+      width: 60vw;
+      position: relative;
+      top: 13vh;
+      left: 50%;
+      transform: translate(-50%, 0);
+      text-align: center;
+      line-height: 1.6;
+      font-family: "Raleway", sans-serif;
+      font-size: 2.4rem;
+    }
+    form {
+      width: 40vw;
+      //height: 30vh;
+      position: relative;
+      //top: 40vh;
+      margin-top: 130px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      /* display: flex;
+      flex-direction: column;
+      justify-content: space-around; */
+      .row {
+        margin-bottom: 20px;
+        input {
+          display: block;
+          padding: 10px;
+          font-size: 18px;
+          color: white;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          background: none;
+          transition: all 200ms ease-in;
+          border-style: solid;
+          border-width: 0 0 0 0;
+          border-color: white;
+          //transition: border-width 300ms ease-in;
+          &:focus {
+            outline: none;
+            //border-width: 0 0 2px 0;
+          }
+
+          &:focus ~ svg {
+            stroke-dashoffset: 0;
+          }
+        }
+      }
+
+      button {
+        margin: 40px auto 10px auto;
+        letter-spacing: 0.1em;
+      }
+    }
+  }
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
 `;
 
 const exampleData = [
   {
-		start: 'self',
-		end: '90vh',
+    start: "self",
+    end: "90vh",
     //startOffset: 200,
     duration: 150,
     properties: [
       {
         startValue: 0,
         endValue: 1,
-        property: 'scale',
-			},
-			{
-				startValue: 0,
-				endValue: 1,
-				property: 'opacity'
-			}
+        property: "scale"
+      },
+      {
+        startValue: 0,
+        endValue: 1,
+        property: "opacity"
+      }
     ]
-	},
-	{
-		start: '.filler',
-		startOffset: 200,
-		duration: 350,
-		properties: [
-			{
-				startValue: 1,
-				endValue: 0,
-				property: 'opacity'
-			}
-		]
-	}
-]
+  },
+  {
+    start: ".filler",
+    startOffset: 200,
+    duration: 350,
+    properties: [
+      {
+        startValue: 1,
+        endValue: 0,
+        property: "opacity"
+      }
+    ]
+  }
+];
 
 class Box extends React.Component {
-	constructor(props) {
-			super(props);
-	}
+  constructor(props) {
+    super(props);
+  }
 
-	render() {
-		return(
-			<StyledBox>
-				<Plx
-					className="example"
-          parallaxData={exampleData}>
-					<div className="container">
-						<p className="i1">Subscribe</p>
-						<p className="i2">Hey everyone! Don't want to miss any of my stories? Sign up via email to receive updates about my latest and greatest!</p>
-						<form>
-							<input 
-								className="name"
-								type="text"
-								placeholder="YOUR NAME"/>
-							<input 
-								className="email"
-								type="email"
-								placeholder="YOUR EMAIL" />
-							<Button label="SIGN ME UP"/>
-						</form>
-					</div>
-				</Plx>
-			</StyledBox>
-		);
-	} 
+  render() {
+    return (
+      <StyledBox>
+        <Plx className="example" parallaxData={exampleData}>
+          <div className="container">
+            <p className="i1">Subscribe</p>
+            <p className="i2">
+              Hey everyone! Don't want to miss any of my stories? Sign up via
+              email to receive updates about my latest and greatest!
+            </p>
+            <form>
+              <div className="row">
+                <input className="name" type="text" placeholder="YOUR NAME" />
+                <Underline width="40vh" />
+              </div>
+              <div className="row">
+                <input
+                  className="email"
+                  type="email"
+                  placeholder="YOUR EMAIL"
+                />
+                <Underline width="40vh" />
+              </div>
+              <Button label="SIGN ME UP" />
+            </form>
+          </div>
+        </Plx>
+      </StyledBox>
+    );
+  }
 }
 
 export default Box;
