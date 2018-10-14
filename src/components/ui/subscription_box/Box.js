@@ -72,8 +72,8 @@ const StyledBox = styled.div`
             //border-width: 0 0 2px 0;
           }
 
-          &:focus ~ svg {
-            stroke-dashoffset: 0;
+          &:focus + div {
+            width: 100%;
           }
         }
       }
@@ -82,11 +82,6 @@ const StyledBox = styled.div`
         margin: 40px auto 10px auto;
         letter-spacing: 0.1em;
       }
-    }
-  }
-  @keyframes dash {
-    to {
-      stroke-dashoffset: 0;
     }
   }
 `;
@@ -142,7 +137,7 @@ class Box extends React.Component {
             <form>
               <div className="row">
                 <input className="name" type="text" placeholder="YOUR NAME" />
-                <Underline width="40vh" />
+                <Underline />
               </div>
               <div className="row">
                 <input
@@ -150,7 +145,7 @@ class Box extends React.Component {
                   type="email"
                   placeholder="YOUR EMAIL"
                 />
-                <Underline width="40vh" />
+                <Underline />
               </div>
               <Button label="SIGN ME UP" />
             </form>
