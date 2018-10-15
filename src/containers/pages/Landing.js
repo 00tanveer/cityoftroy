@@ -37,7 +37,6 @@ const Header = styled.div`
   background-color: black;
   display: grid;
   grid-template-columns: 70px 1fr 1fr 150px;
-  grid-template-rows: 50px 50px;
   grid-template-areas: 'menu title title search_bar';
   padding: 20px 0 0 20px;
   .menu {
