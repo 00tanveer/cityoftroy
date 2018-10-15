@@ -4,15 +4,15 @@ import styled from 'styled-components';
 const SearchBar = () => {
 	const Bar = styled.span`
 		.container {
-			position: fixed;
+			//position: fixed;
 			//width: 15vw;
-			top: 4vh;
-			right: 5px;
+			//top: 4vh;
+			//right: 5px;
 			z-index: 5000;
 			.fa-search {
 				//display: inline-block;
 				color: white;
-				font-size: 3rem;
+				font-size: 2.4rem;
 			}
 			input {
 				//display: inline-block;
@@ -20,7 +20,7 @@ const SearchBar = () => {
 				color: white;
 				border: none;
 				background: none;
-				width: 11vw;
+				width: 25vw;
 				margin-left: 10px;
 				font-size: 20px;
 				line-height: 1.4;

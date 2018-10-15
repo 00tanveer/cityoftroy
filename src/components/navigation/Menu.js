@@ -54,14 +54,16 @@ class Menu extends React.Component {
         }
 
         > .button {
+          display: block;
+          position: relative;
           //background-color: yellow;
           //background-color: ${props => props.theme.main};
           background-color: ${props => props.theme.maroon};
           height: 4.5rem;
           width: 4.5rem;
-          position: fixed;
-          top: 3vh;
-          left: calc(${this.state.height}px / 27);
+          //position: fixed;
+          //top: 3vh;
+          //left: calc(${this.state.height}px / 27);
           border-radius: 50%;
           z-index: 2000;
           box-shadow: 0 4px 4rem rgba(${props => props.theme.maroon}, 0.1);
@@ -91,7 +93,7 @@ class Menu extends React.Component {
               content: "";
               position: absolute;
               left: 0;
-              transition: all 0.2s;
+              transition: all 0.8s;
             }
 
             &:before {
@@ -104,21 +106,24 @@ class Menu extends React.Component {
         }
 
         > .background {
-          height: 5rem;
-          width: 5rem;
-          border-radius: 50%;
-          position: fixed;
-          /* top: 3rem;
-          left: 3rem; */
-          /* background-image: linear-gradient(
-            to bottom right,
-            black 75%,
-            ${props => props.theme.main} 25%
-          ); */
-          background-color: black;
-          z-index: 1000;
-          transition: transform 0.1s cubic-bezier(.01,.69,.83,.67);
-        }
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 4.5rem;
+            width: 4.55rem;
+            border-radius: 50%;
+            //position: fixed;
+            /* top: 3rem;
+            left: 3rem; */
+            /* background-image: linear-gradient(
+              to bottom right,
+              black 75%,
+              ${props => props.theme.main} 25%
+            ); */
+            background-color: black;
+            z-index: 1000;
+            transition: transform 0.4s cubic-bezier(.01,.69,.83,.67);
+          }
 
         > .navi {
           height: 100vh;
@@ -129,8 +134,8 @@ class Menu extends React.Component {
           pointer-events: none;
           opacity: 0;
           width: 0;
-          transition: all 0.1s;
-          transition: all 0.3s cubic-bezier(.01,.69,.83,.67);
+          //transition: all 0.1s;
+          transition: all 0.4s cubic-bezier(.01,.69,.83,.67);
 
           > .list_ {
             position: absolute;
