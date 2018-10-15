@@ -16,34 +16,54 @@ var slides = [
   "https://images.unsplash.com/photo-1443926818681-717d074a57af?fit=crop&fm=jpg&h=825&q=80&w=1325"
 ];
 
-const H2 = styled.h2`
-  position: relative;
+const Title = styled.p`
+  //position: relative;
   //top: 50%;
-  left: 50%;
-  transform: translate(-50%, 50%);
+  //left: 50%;
+  //transform: translate(-50%, 50%);
   color: white;
   font-family: "Great Vibes", cursive;
   font-weight: 300;
   text-shadow: 0 0 3px white;
-  font-size: 4rem;
   text-align: center;
   letter-spacing: 1rem;
-  //z-index: 000;
 `;
 
-const H3 = styled.h3`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 50%);
-  margin-top: 21rem;
-  color: white;
-  font-family: "Lato", sans-serif;
-  font-weight: 300;
-  text-shadow: 0 0 3px white;
-  font-size: 2rem;
-  text-align: center;
-  letter-spacing: 1rem;
+const Header = styled.div`
+  position: fixed;
+  z-index: 4000;
+  top: 0;
+  width: 100%;
+  background-color: black;
+  display: grid;
+  grid-template-columns: 70px 1fr 1fr 150px;
+  grid-template-rows: 50px 50px;
+  grid-template-areas: 'menu title title search_bar';
+  padding: 20px 0 0 20px;
+  .menu {
+    grid-area: menu;
+  }
+  .title {
+    grid-area: title;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    p {
+      margin: 0 auto;
+      font-size: 2.5rem;
+    }
+  }
+  .search_bar {
+    grid-area: search_bar;
+    padding: 9px;
+  }
+  @media (min-width: 500px) {
+    .title {
+      p {
+        font-size: 3.5rem;
+      }
+    }
+  }
 `;
 
 class Landing extends React.Component {
@@ -74,7 +94,11 @@ class Landing extends React.Component {
     //console.log(isAuthenticated());
     return (
       <div className="landing_container">
-        <H2>City of Troy</H2>
+        <Header>
+          <div className="title"><Title>City of Troy</Title></div>
+          <div className="menu"><Menu/></div>
+          <div className="search_bar"><SearchBar /></div>
+        </Header>
         {/* <H3>Visit this link from time to time. You'll see updates here. :)</H3> */}
         <Carousel slides={slides} />
         <Box />
@@ -83,8 +107,6 @@ class Landing extends React.Component {
           style={{ backgroundColor: "black", height: "100vh", width: "100vw" }}
         />
         <Card />
-        <Menu />
-        <SearchBar />
         <Footer />
       </div>
     );
