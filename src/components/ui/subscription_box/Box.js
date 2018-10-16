@@ -39,11 +39,11 @@ const StyledBox = styled.div`
       top: 45px;
       left: 50%;
       transform: translate(-50%, 0);
-      margin: 0 30px;
+      //margin: 0 30px;
       text-align: center;
       line-height: 1.6;
       font-family: "Raleway", sans-serif;
-      font-size: 2.4rem;
+      font-size: 2rem;
     }
     form {
       width: 40vw;
@@ -60,6 +60,7 @@ const StyledBox = styled.div`
         margin-bottom: 20px;
         input {
           display: block;
+          width: 100%;
           padding: 10px;
           font-size: 18px;
           color: white;
@@ -83,7 +84,8 @@ const StyledBox = styled.div`
       }
 
       button {
-        margin: 40px auto 10px auto;
+        margin: 25px auto 10px auto;
+        font-size: 1.6rem;
         letter-spacing: 0.1em;
       }
     }

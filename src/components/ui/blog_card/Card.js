@@ -30,7 +30,7 @@ const CardContainer = styled.div`
     flex-direction: row;
     max-width: 1100px;
     max-height: 520px;
-    margin: 100px auto;
+    margin: 70px auto;
     .card_text {
       height: 100%;
       margin: 0 30px;
