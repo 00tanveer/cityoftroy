@@ -7,6 +7,7 @@ const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   height: 500px;
+
   color: white;
   font-family: "Raleway";
   text-align: center;
@@ -26,6 +27,24 @@ const CardContainer = styled.div`
 
   @media (min-width: 600px) {
     flex-direction: row;
+    max-width: 1100px;
+    margin: 100px auto;
+    .card_text {
+      height: 100%;
+      margin: 0 30px;
+      align-content: center;
+      padding: 30px 0;
+    }
+    .thumbnail {
+      /* margin: 0 50px;
+      align-content: center; */
+      div {
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
   }
 `;
 
@@ -48,12 +67,7 @@ const Excerpt = styled.p`
 `;
 
 const TitleImage = styled.div`
-  overflow: hidden;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
   height: 100%;
-  padding-top: 10%;
   img {
     height: 100%;
   }
@@ -80,11 +94,7 @@ class Card extends React.Component {
           <Excerpt>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            ad minim veniam, quis nostrud exercitation
           </Excerpt>
           <Button label="Read More" />
           <socialIcon>socialIcon</socialIcon>
