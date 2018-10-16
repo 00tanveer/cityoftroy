@@ -22,7 +22,7 @@ const CardContainer = styled.div`
     //margin: 10px;
     margin-bottom: 10px;
     > * {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
   }
 
@@ -36,6 +36,9 @@ const CardContainer = styled.div`
       margin: 0 30px;
       align-content: center;
       padding: 85px 0;
+      > * {
+        margin-bottom: 20px;
+      }
     }
     .thumbnail {
       /* margin: 0 50px;
@@ -90,13 +93,14 @@ class Card extends React.Component {
           <TitleImage>
             <img
               src={
-                "https://2.bp.blogspot.com/-TJZnqUmbZnw/W24HZ2Gx0eI/AAAAAAAArGQ/ou2sE4dVvHontzMksOGSCehRp8UDP4x9gCLcBGAs/s1600/IMG_20180628_121913_HDR.jpg"
+                //"https://2.bp.blogspot.com/-TJZnqUmbZnw/W24HZ2Gx0eI/AAAAAAAArGQ/ou2sE4dVvHontzMksOGSCehRp8UDP4x9gCLcBGAs/s1600/IMG_20180628_121913_HDR.jpg"
+                "https://scontent-amt2-1.cdninstagram.com/vp/c93ec8e1893cac67160f77e281f32cfa/5C5AD543/t51.2885-15/sh0.08/e35/c0.120.964.964/s640x640/40705774_283833208891041_1724639902372870603_n.jpg"
               }
             />
           </TitleImage>
         </div>
         <div className="card_text">
-          <Tags>Routine Health</Tags>
+          <Tags>Routine    Health</Tags>
           <Title>How To Be A Morning Person</Title>
           <Meta>October 3, 2018 5 minutes 32 comments</Meta>
           <Excerpt>

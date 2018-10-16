@@ -49,7 +49,7 @@ const Header = styled.div`
     align-content: center;
     p {
       margin: 0 auto;
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
   }
   .search_bar {
@@ -103,9 +103,9 @@ class Landing extends React.Component {
         <Box />
         <div
           className="filler"
-          style={{ backgroundColor: "black", height: "100vh", width: "100vw" }}
-        />
-        <Card />
+          // style={{ backgroundColor: "black", height: "100vh", width: "100vw" }}
+        >
+        <Card /></div>
         <Footer />
       </div>
     );

@@ -8,7 +8,7 @@ const Footer = (props) => {
             position: fixed;
             bottom: 20px;
             width: 100vw;
-            height: 10vh;
+            height: 50px;
             display: flex;
             justify-content: center;
             .fa-instagram {
