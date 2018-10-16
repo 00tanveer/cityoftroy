@@ -7,14 +7,17 @@ import Underline from "../../../components/ui/Underline";
 import Button from "../../../components/ui/Button";
 
 const StyledBox = styled.div`
+  padding: 0 40px;
   .container {
     position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     display: block;
     color: white;
     background-color: ${theme.maroon};
     //height: 80vh;
-    width: 70vw;
-    margin: 100px auto 100px auto;
+    max-width: 650px;
+    margin: 100px 0 100px 0;
     padding: 20px 0 30px 0;
     /* display: flex;
 		flex-direction: column;
@@ -31,11 +34,12 @@ const StyledBox = styled.div`
       z-index: 3000;
     }
     .i2 {
-      width: 60vw;
+      width: 75%;
       position: relative;
-      top: 13vh;
+      top: 45px;
       left: 50%;
       transform: translate(-50%, 0);
+      margin: 0 30px;
       text-align: center;
       line-height: 1.6;
       font-family: "Raleway", sans-serif;
@@ -46,7 +50,7 @@ const StyledBox = styled.div`
       //height: 30vh;
       position: relative;
       //top: 40vh;
-      margin-top: 130px;
+      margin-top: 75px;
       left: 50%;
       transform: translate(-50%, 0);
       /* display: flex;
