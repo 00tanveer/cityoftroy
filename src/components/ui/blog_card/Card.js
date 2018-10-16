@@ -6,20 +6,21 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 500px;
+  height: 800px;
 
   color: white;
   font-family: "Raleway";
   text-align: center;
-  margin: 10px;
+  margin: 50px;
   .card_text {
     > * {
       margin-bottom: 10px;
     }
   }
   .thumbnail {
-    height: 100%;
-    margin: 10px;
+    max-height: 520px;
+    //margin: 10px;
+    margin-bottom: 10px;
     > * {
       margin-bottom: 10px;
     }
@@ -28,12 +29,13 @@ const CardContainer = styled.div`
   @media (min-width: 600px) {
     flex-direction: row;
     max-width: 1100px;
+    max-height: 520px;
     margin: 100px auto;
     .card_text {
       height: 100%;
       margin: 0 30px;
       align-content: center;
-      padding: 30px 0;
+      padding: 85px 0;
     }
     .thumbnail {
       /* margin: 0 50px;
@@ -47,7 +49,13 @@ const CardContainer = styled.div`
     }
   }
 `;
-
+const TitleImage = styled.div`
+  //height: 100%;
+  img {
+    //height: 100%;
+    width: 100%;
+  }
+`;
 const Tags = styled.div`
   font-size: 2rem;
   //margin-bottom: 10px;
@@ -58,18 +66,18 @@ const Title = styled.p`
 `;
 const Meta = styled.div`
   font-size: 1.5rem;
-  font-family: "Raleway", cursive;
+  font-family: cursive;
   //margin-bottom: 10px;
 `;
 const Excerpt = styled.p`
   font-size: 1.5rem;
   line-height: 1.4;
 `;
-
-const TitleImage = styled.div`
-  height: 100%;
-  img {
-    height: 100%;
+const ShareBar = styled.span`
+  font-size: 2rem;
+  > * {
+    margin: 0 10px;
+    cursor: pointer;
   }
 `;
 
@@ -97,7 +105,10 @@ class Card extends React.Component {
             ad minim veniam, quis nostrud exercitation
           </Excerpt>
           <Button label="Read More" />
-          <socialIcon>socialIcon</socialIcon>
+          <ShareBar>
+            <i className="fab fa-facebook" />
+            <i className="fab fa-twitter" />
+          </ShareBar>
         </div>
       </CardContainer>
       //</LayoutWrapper>
