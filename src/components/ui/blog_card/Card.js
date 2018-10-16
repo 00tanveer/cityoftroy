@@ -8,35 +8,45 @@ const CardContainer = styled.div`
   align-items: center;
   height: 500px;
   color: white;
-  font-family: 'Raleway';
+  font-family: "Raleway";
   text-align: center;
   margin: 10px;
   .card_text {
+    > * {
+      margin-bottom: 10px;
+    }
   }
   .thumbnail {
     height: 100%;
     margin: 10px;
+    > * {
+      margin-bottom: 10px;
+    }
+  }
+
+  @media (min-width: 600px) {
+    flex-direction: row;
   }
 `;
-// const TitleImage = styled.div`
-//   height: 100%;
-// `;
+
 const Tags = styled.div`
   font-size: 2rem;
+  //margin-bottom: 10px;
 `;
 const Title = styled.p`
   font-size: 4rem;
+  //margin-bottom: 10px;
 `;
-const Meta =  styled.div`
+const Meta = styled.div`
   font-size: 1.5rem;
-  font-family: cursive;
+  font-family: "Raleway", cursive;
+  //margin-bottom: 10px;
 `;
 const Excerpt = styled.p`
   font-size: 1.5rem;
   line-height: 1.4;
 `;
 
-// Grid row
 const TitleImage = styled.div`
   overflow: hidden;
   display: block;
@@ -55,33 +65,30 @@ class Card extends React.Component {
       //<LayoutWrapper>
       <CardContainer>
         <div className="thumbnail">
-            <TitleImage>
-              <img
-                src={
-                  "https://2.bp.blogspot.com/-TJZnqUmbZnw/W24HZ2Gx0eI/AAAAAAAArGQ/ou2sE4dVvHontzMksOGSCehRp8UDP4x9gCLcBGAs/s1600/IMG_20180628_121913_HDR.jpg"
-                }
-              />
-            </TitleImage>
-          </div>
-          <div className="card_text">
-            <Tags>Routine Health</Tags>
-            <Title>How To Be A Morning Person</Title>
-            <Meta>
-              October 3, 2018 5 minutes 32 comments
-            </Meta>
-            <Excerpt>
-              Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-              dolor in reprehenderit in voluptate velit esse cillum dolore eu
-              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est
-              laborum.
-            </Excerpt>
-            <Button label="Read More" />
-            <socialIcon>socialIcon</socialIcon>
-          </div>
+          <TitleImage>
+            <img
+              src={
+                "https://2.bp.blogspot.com/-TJZnqUmbZnw/W24HZ2Gx0eI/AAAAAAAArGQ/ou2sE4dVvHontzMksOGSCehRp8UDP4x9gCLcBGAs/s1600/IMG_20180628_121913_HDR.jpg"
+              }
+            />
+          </TitleImage>
+        </div>
+        <div className="card_text">
+          <Tags>Routine Health</Tags>
+          <Title>How To Be A Morning Person</Title>
+          <Meta>October 3, 2018 5 minutes 32 comments</Meta>
+          <Excerpt>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </Excerpt>
+          <Button label="Read More" />
+          <socialIcon>socialIcon</socialIcon>
+        </div>
       </CardContainer>
       //</LayoutWrapper>
     );
