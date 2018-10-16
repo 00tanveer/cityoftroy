@@ -95,7 +95,7 @@ const StyledBox = styled.div`
 const exampleData = [
   {
     start: "self",
-    end: "90vh",
+    end: "70vh",
     //startOffset: 200,
     duration: 150,
     properties: [
