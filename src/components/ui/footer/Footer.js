@@ -16,12 +16,20 @@ const Footer = (props) => {
                 font-size: 4rem;
                 margin: 2vw;
                 text-shadow: 0 0 10px white;
+                transition: transform .3s linear;
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
             .fa-facebook {
                 color: white;
                 font-size: 4rem;
                 margin: 2vw;
                 text-shadow: 0 0 3px white;
+                transition: transform .3s linear;
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
         }
     `

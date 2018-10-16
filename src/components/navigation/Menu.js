@@ -192,7 +192,7 @@ class Menu extends React.Component {
 
         > .checkbox:checked ~ .background {
           //transform: scale(53);
-          transform: scale(calc(${props => props.heightOrWidth} / 20));
+          transform: scale(calc(${props => props.heightOrWidth} / 17));
           //zoom: 5;
         }
         /* > .checkbox:checked ~ .button {
