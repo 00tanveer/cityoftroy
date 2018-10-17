@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from '../../components/ui/header/Header';
 
 class Contact extends React.Component {
 	constructor(props) {
@@ -7,7 +8,7 @@ class Contact extends React.Component {
 
 	render() {
 		return(
-			<div>Contact</div>
+			<Header />
 		);
 	}
 }
