@@ -11,244 +11,266 @@ const StyledInput = Input.withComponent(Button);
 
 let Inline = ReactQuill.Quill.import('blots/inline');
 class SyntaxBlot extends Inline {
-    static create(value) {
-        let node = super.create();
-        node.setAttribute('src', value.url);
-        return node;
-    }
+		static create(value) {
+				let node = super.create();
+				node.setAttribute('src', value.url);
+				return node;
+		}
 
-    static value(node) {
-        return {
-            alt: node.getAttribute('alt'),
-            url: node.getAttribute('src')
-        };
-    }
+		static value(node) {
+				return {
+						alt: node.getAttribute('alt'),
+						url: node.getAttribute('src')
+				};
+		}
 }
 
 SyntaxBlot.blotName = 'em';
 SyntaxBlot.tagName = 'strong';
 ReactQuill.Quill.register('formats/em', SyntaxBlot);
 const CustomToolbar = (props) => (
-    <div id="toolbar">
-      <select className="ql-font" defaultValue={""} onChange={e => e.persist()} />
-      <select className="ql-header" defaultValue={""} onChange={e => e.persist()}>
-        <option value="1" />
-        <option value="2" />
-        <option selected />
-      </select>
-      <select className="ql-size" defaultValue={""} onChange={e => e.persist()}>
-        <option value="small" />
-        <option value="normal" />
-        <option value="large" />
-        <option value="huge" />
-      </select>
-      <button className="ql-bold" />
-      <button className="ql-italic" />
-      <select className="ql-color">
-        <option value="red" />
-        <option value="green" />
-        <option value="blue" />
-        <option value="orange" />
-        <option value="violet" />
-        <option value="#d0d1d2" />
-        <option selected />
-      </select>
-      <select className="ql-background" />
-      <button className="ql-blockquote" />
-      <button className="ql-code-block" />
-      <select className="ql-align" />
-      <button className="ql-image" />
-      <button className="ql-link" />
-      <button className="ql-list" value="ordered" />
-      <button className="ql-list" value="bullet" />
-      <button className="ql-strike" />
-    </div>
-  );
+		<div id="toolbar">
+			<select className="ql-font" defaultValue={""} onChange={e => e.persist()} />
+			<select className="ql-header" defaultValue={""} onChange={e => e.persist()}>
+				<option value="1" />
+				<option value="2" />
+				<option selected />
+			</select>
+			<select className="ql-size" defaultValue={""} onChange={e => e.persist()}>
+				<option value="small" />
+				<option value="normal" />
+				<option value="large" />
+				<option value="huge" />
+			</select>
+			<button className="ql-bold" />
+			<button className="ql-italic" />
+			<select className="ql-color">
+				<option value="red" />
+				<option value="green" />
+				<option value="blue" />
+				<option value="orange" />
+				<option value="violet" />
+				<option value="#d0d1d2" />
+				<option selected />
+			</select>
+			<select className="ql-background" />
+			<button className="ql-blockquote" />
+			<button className="ql-code-block" />
+			<select className="ql-align" />
+			<button className="ql-image" />
+			<button className="ql-link" />
+			<button className="ql-list" value="ordered" />
+			<button className="ql-list" value="bullet" />
+			<button className="ql-strike" />
+		</div>
+	);
 
 const QuillContainer = styled.div`
-  .quill { 
-      > .ql-container {
-          .ql-editor {
-              .ql-syntax {
-                  background-color: #2f4f4f!important;
-                  border: 1px solid grey!important;
-              }
-          }
-      }
-  }
+	.quill {
+			> .ql-container {
+					.ql-editor {
+							.ql-syntax {
+									background-color: #2f4f4f!important;
+									border: 1px solid grey!important;
+							}
+					}
+			}
+	}
 `
 
 class Editor extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+				editorHtml: '',
+				mountedEditor: false,
+				blogId: '',
+				title: ''
+		} // You can also pass a Quill Delta here
+		console.log(props.match.path);
+		this.quillRef = null;
+		this.reactQuillRef = null;
+		this.handleChange = this.handleChange.bind(this);
+		this.onTitleChange = this.onTitleChange.bind(this);
+		this.imageHandler = this.imageHandler.bind(this);
+		this.syntaxButtonHandler = this.syntaxButtonHandler.bind(this);
+		this.saveHandler = this.saveHandler.bind(this);
+		this.attachQuillRefs = this.attachQuillRefs.bind(this);
+		this.login = this.login.bind(this);
+	}
 
-    constructor(props) {
-        super(props)
-        this.state = {
-           editorHtml: '',
-           mountedEditor: false
-        } // You can also pass a Quill Delta here
+	//AUTH
+	login(){
+			this.props.auth.login();
+	}
 
-        this.quillRef = null;
-        this.reactQuillRef = null;
-        this.handleChange = this.handleChange.bind(this);
-        this.imageHandler = this.imageHandler.bind(this);
-        this.syntaxButtonHandler = this.syntaxButtonHandler.bind(this);
-        this.saveHandler = this.saveHandler.bind(this);
-        this.attachQuillRefs = this.attachQuillRefs.bind(this);
-        this.login = this.login.bind(this);
-    }
+	//LIFECYCLE HOOKS
+	componentDidMount(){
+		this.attachQuillRefs();
+		axios.get('/blogs/blogs')
+			.then(res => {
+				console.log(res.data.data);
+				if (res.data.data.length !== 0) {
+					this.quillRef.setContents(res.data.data[0].delta_ops);
+					this.setState({
+						blogId: res.data.data[0]._id,
+						title: res.data.data[0].title
+					}, () => {
+						console.log(this.state.blogId);
+					})
+				}
+			})
+	}
 
-    //AUTH
-    login(){
-        this.props.auth.login();
-    }
+	componentDidUpdate(){
+			this.attachQuillRefs();
+	}
+	//////////////////
+	attachQuillRefs = () => {
+			if (typeof this.reactQuillRef.getEditor !== 'function') return;
+			// Skip if Quill reference is defined:
+			if (this.quillRef != null) return;
 
-    //LIFECYCLE HOOKS
-    componentDidMount(){
-        this.attachQuillRefs();
-        axios.get('/blogs/blogs')
-            .then(res => {
-                this.quillRef.setContents(res.data.data[0].delta_ops);
-            })
-    }
+			const quillRef = this.reactQuillRef.getEditor();
+			if (quillRef != null) this.quillRef = quillRef;
+	}
 
-    componentDidUpdate(){
-        this.attachQuillRefs();
-    }
-    //////////////////
-    attachQuillRefs = () => {
-        if (typeof this.reactQuillRef.getEditor !== 'function') return;
-        // Skip if Quill reference is defined:
-        if (this.quillRef != null) return;
+	handleChange(html) {
+			//console.log(html);
+			this.setState({ editorHtml: html });
+			//console.log(this.quillRef.getContents().ops);
 
-        const quillRef = this.reactQuillRef.getEditor();
-        if (quillRef != null) this.quillRef = quillRef;
-    }
+			let blog = {
+					id: this.state.blogId,
+					title: this.state.title,
+					body: '',
+					delta_ops: this.quillRef.getContents().ops
+			}
+			//console.log(blog);
+			axios.put('/blogs/blogs', {blog})
+			.then(res => {
+					//console.log(res);
+			})
+	}
 
-    handleChange(html) {
-        //console.log(html);
-        this.setState({ editorHtml: html });
-        //console.log(this.quillRef.getContents().ops);
+	onTitleChange(e) {
+		console.log(e.target.value);
+		let title = e.target.value;
+		this.setState({title: title});
+	}
 
-        let blog = {
-            title: 'blog',
-            body: '',
-            delta_ops: this.quillRef.getContents().ops
-        }
-        //console.log(blog);
-        axios.put('/blogs/blogs', {blog})
-        .then(res => {
-            //console.log(res);
-        })
-    }
+	imageHandler() {
+			const input = document.createElement('input');
+			input.setAttribute('type','file');
+			input.click();
 
-    imageHandler() {
-        const input = document.createElement('input');
-        input.setAttribute('type','file');
-        input.click();
-    
-        input.onchange = () => {
-            const file = input.files[0];
-            if(/^image\//.test(file.type)){
-                this.saveToServer(file);
-            } else {
-                console.warn('You can only upload images.');
-            }
-        };
-    }
+			input.onchange = () => {
+					const file = input.files[0];
+					if(/^image\//.test(file.type)){
+							this.saveToServer(file);
+					} else {
+							console.warn('You can only upload images.');
+					}
+			};
+	}
 
-    saveToServer(file) {
-        const data = new FormData();
-    
-        data.append('file', file);
-        data.append('filename', file.name);
-        // for (var key of data.entries()) {
-        //     console.log(key[0] + ', ' + key[1]);
-        // }
-        fetch('/blogs/blogs/uploadPicture', {
-            method: 'POST',
-            body: data,
-        }).then((response) => {
-            response.json().then((body) => {
-                //this.setState({ imageURL: `http://localhost:8000/${body.file}` });
-                console.log(body);
-                this.insertToEditor(body.url);
-                //insertToEditor(body.file);
-        });
-        });
-    }
+	saveToServer(file) {
+			const data = new FormData();
 
-    insertToEditor(url) {
-        // push image url to rich editor.
-        console.log(url);
-        const range = this.quillRef.getSelection();
-        console.log(range);
-        this.quillRef.insertEmbed(range.index, 'image', url);
-        this.quillRef.insertEmbed(range.index + 1, 'code', 'dsfsdf');
-    }
+			data.append('file', file);
+			data.append('filename', file.name);
+			// for (var key of data.entries()) {
+			//     console.log(key[0] + ', ' + key[1]);
+			// }
+			fetch('/blogs/blogs/uploadPicture', {
+					method: 'POST',
+					body: data,
+			}).then((response) => {
+					response.json().then((body) => {
+							//this.setState({ imageURL: `http://localhost:8000/${body.file}` });
+							console.log(body);
+							this.insertToEditor(body.url);
+							//insertToEditor(body.file);
+			});
+			});
+	}
 
-    syntaxButtonHandler() {
-        console.log('herere');
-        let range = this.quillRef.getSelection();
-        console.log(range);
-        if (range) {
-            this.quillRef.format('em', true);
-            //this.quillRef.insertText(range.index, 'hahahaha', 'bold', false);
-        }
-    }
+	insertToEditor(url) {
+			// push image url to rich editor.
+			console.log(url);
+			const range = this.quillRef.getSelection();
+			console.log(range);
+			this.quillRef.insertEmbed(range.index, 'image', url);
+			this.quillRef.insertEmbed(range.index + 1, 'code', 'dsfsdf');
+	}
 
-    saveHandler() {
-        console.log('save clicked');
-        console.log(this.quillRef.getSelection());
-    }
+	syntaxButtonHandler() {
+			console.log('herere');
+			let range = this.quillRef.getSelection();
+			console.log(range);
+			if (range) {
+					this.quillRef.format('em', true);
+					//this.quillRef.insertText(range.index, 'hahahaha', 'bold', false);
+			}
+	}
 
-    render(){
-        const modules = {
-            toolbar: {
-                container: '#toolbar',
-                handlers: {
-                    image: this.imageHandler
-                }
-            },
-            clipboard: {
-                matchVisual: false,
-            }
-        }
-        return(
-            <div className="container">
-                <div className="text-editor">
-                    <CustomToolbar 
-                        syntaxButtonHandler={this.syntaxButtonHandler}/>
-                    &nbsp;
-                    <ReactQuill
-                        ref={(el) => {this.reactQuillRef = el}}
-                        onChange={this.handleChange}
-                        modules={modules}
-                        formats={Editor.formats}
-                        defaultValue={this.state.editorHtml}/>
-                    <form>
-                      <FormInput
-                        placeholder='enter a tag'/>
-                    </form>
-                    <StyledInput 
-                        label="Save"
-                        clickHandler={this.saveHandler} />
-                    &npsp;
-                </div>
-            </div>
-        );
-    }
+	saveHandler() {
+			console.log('save clicked');
+			console.log(this.quillRef.getSelection());
+	}
+
+	render(){
+			const modules = {
+					toolbar: {
+							container: '#toolbar',
+							handlers: {
+									image: this.imageHandler
+							}
+					},
+					clipboard: {
+							matchVisual: false,
+					}
+			}
+			return(
+				<div className="container">
+					<div className="text-editor">
+							<CustomToolbar
+									syntaxButtonHandler={this.syntaxButtonHandler}/>
+							&nbsp;
+							<FormInput 
+								placeholder="Article Title"
+								value={this.state.title}
+								onChange={this.onTitleChange}/>
+							<ReactQuill
+									ref={(el) => {this.reactQuillRef = el}}
+									onChange={this.handleChange}
+									modules={modules}
+									formats={Editor.formats}
+									defaultValue={this.state.editorHtml}/>
+							<form>
+							<FormInput
+								placeholder='enter a tag'/>
+							</form>
+							<StyledInput
+									label="Save"
+									clickHandler={this.saveHandler} />
+							&npsp;
+					</div>
+				</div>
+			);
+	}
 }
 
 Editor.modules = {
-    toolbar: {
-        container: '#toolbar',
-        handlers: {
-            image: Editor.prototype.imageHandler
-        }
-    },
-    clipboard: {
-        matchVisual: false,
-    }
+		toolbar: {
+				container: '#toolbar',
+				handlers: {
+						image: Editor.prototype.imageHandler
+				}
+		},
+		clipboard: {
+				matchVisual: false,
+		}
 };
 
 // Editor.modules.toolbar = [
@@ -269,10 +291,10 @@ Editor.modules = {
 
 
 Editor.formats = [
-   'header', 'font', 'size',
-   'bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block',
-   'align', 'list', 'bullet', 'indent',
-   'link', 'image', 'color', 'background'
+	 'header', 'font', 'size',
+	 'bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block',
+	 'align', 'list', 'bullet', 'indent',
+	 'link', 'image', 'color', 'background'
 ]
 
 export default Editor;
