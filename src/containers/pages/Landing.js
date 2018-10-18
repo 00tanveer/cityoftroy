@@ -1,12 +1,7 @@
 import React from "react";
-import Header from '../../components/ui/header/Header';
-import Menu from "../../components/navigation/Menu";
-import styled from "styled-components";
-import Plx from "react-plx";
+import Header from "../../components/ui/header/Header";
 import _ from "lodash";
-import theme from "../../styles/theme";
 import Footer from "../../components/ui/footer/Footer";
-import SearchBar from "../../components/ui/search_bar/SearchBar";
 import Carousel from "../../components/ui/carousel/Carousel";
 import Box from "../../components/ui/subscription_box/Box";
 import Card from "../../components/ui/blog_card/Card";
@@ -45,7 +40,7 @@ class Landing extends React.Component {
     //console.log(isAuthenticated());
     return (
       <div className="landing_container">
-        <Header/>
+        <Header />
         {/* <H3>Visit this link from time to time. You'll see updates here. :)</H3> */}
         <Carousel slides={slides} />
         <Box />
@@ -53,7 +48,8 @@ class Landing extends React.Component {
           className="filler"
           // style={{ backgroundColor: "black", height: "100vh", width: "100vw" }}
         >
-        <Card /></div>
+          <Card />
+        </div>
         <Footer />
       </div>
     );
