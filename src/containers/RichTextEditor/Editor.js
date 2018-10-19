@@ -1,4 +1,5 @@
 import React from "react";
+import history from '../../history';
 import ReactQuill from "react-quill";
 import axios from "axios";
 
@@ -85,14 +86,16 @@ class Editor extends React.Component {
       editorHtml: "",
       mountedEditor: false,
       blogId: "",
-      tags: [],
+			tags: [],
+			selectedTags: [],
       title: ""
     }; // You can also pass a Quill Delta here
     //console.log(props.match.path);
     this.quillRef = null;
     this.reactQuillRef = null;
     this.handleChange = this.handleChange.bind(this);
-    this.onTitleChange = this.onTitleChange.bind(this);
+		this.onTitleChange = this.onTitleChange.bind(this);
+		this.handleInputChange = this.handleInputChange.bind(this);
     this.imageHandler = this.imageHandler.bind(this);
     this.syntaxButtonHandler = this.syntaxButtonHandler.bind(this);
     this.saveHandler = this.saveHandler.bind(this);
@@ -108,21 +111,7 @@ class Editor extends React.Component {
   //LIFECYCLE HOOKS
   componentDidMount() {
     this.attachQuillRefs();
-    axios.get("/blogs/blogs").then(res => {
-      console.log(res.data.data);
-      if (res.data.data.length !== 0) {
-        this.quillRef.setContents(res.data.data[0].delta_ops);
-        this.setState(
-          {
-            blogId: res.data.data[0]._id,
-            title: res.data.data[0].title
-          },
-          () => {
-            console.log(this.state.blogId);
-          }
-        );
-      }
-    });
+    
     axios.get("/blogs/blogs/tags").then(res => {
       let tags = [];
       tags = res.data.data.map(tag => {
@@ -132,7 +121,24 @@ class Editor extends React.Component {
         {
           tags: tags
         },
-        () => console.log(this.state.tags)
+        () => {
+					axios.get("/blogs/blogs").then(res => {
+						console.log(res.data.data);
+						if (res.data.data.length !== 0) {
+							this.quillRef.setContents(res.data.data[0].delta_ops);
+							this.setState(
+								{
+									blogId: res.data.data[0]._id,
+									title: res.data.data[0].title,
+									selectedTags: res.data.data[0].tags
+								},
+								() => {
+									console.log(this.state.selectedTags);
+								}
+							);
+						}
+					});
+				}
       );
     });
   }
@@ -157,7 +163,8 @@ class Editor extends React.Component {
 
     let blog = {
       id: this.state.blogId,
-      title: this.state.title,
+			title: this.state.title,
+			tags: this.state.selectedTags,
       body: "",
       delta_ops: this.quillRef.getContents().ops
     };
@@ -173,14 +180,38 @@ class Editor extends React.Component {
     let title = e.target.value;
     let blog = {
       id: this.state.blogId,
-      title: title,
+			title: title,
+			tags: this.state.selectedTags,
       delta_ops: this.quillRef.getContents().ops
     };
     axios.put("/blogs/blogs", { blog }).then(res => {
       console.log(res.data);
       this.setState({ title: title });
     });
-  }
+	}
+	
+	handleInputChange(e) {
+		console.log(e.target.name);
+		let tag = e.target.name;
+		let selectedTags;
+		if (this.state.selectedTags.indexOf(tag) === -1) {
+			selectedTags = this.state.selectedTags.concat(tag);
+		} else {
+			selectedTags = this.state.selectedTags;
+			let indexToRemove = selectedTags.indexOf(tag);
+			selectedTags.splice(indexToRemove, 1);
+		}
+		console.log(selectedTags);
+		let blog = {
+			id: this.state.blogId,
+			title: this.state.title,
+			tags: selectedTags,
+			delta_ops: this.quillRef.getContents().ops
+		}
+		axios.put('/blogs/blogs', {blog}).then(res => {
+			this.setState({selectedTags: selectedTags}, () => console.log(this.state.selectedTags));
+		})
+	}
 
   imageHandler() {
     const input = document.createElement("input");
@@ -239,7 +270,18 @@ class Editor extends React.Component {
 
   saveHandler() {
     console.log("save clicked");
-    console.log(this.quillRef.getSelection());
+		console.log(this.quillRef.getSelection());
+		let blog = {
+			id: this.state.blogId,
+			data: Date.now(),
+			title: this.state.title,
+			tags: this.state.selectedTags,
+			delta_ops: this.quillRef.getContents().ops
+		}
+		axios.put('/blogs/blogs', {blog}).then(res => {
+			console.log(res.data);
+			history.replace('/fashion');
+		})
   }
 
   render() {
@@ -260,8 +302,8 @@ class Editor extends React.Component {
         {this.state.tags.map(tag => {
           console.log(tag);
           return (
-            <label key={tag} style={{ color: 'white' }}>
-              <input value={tag} checked={true} type="checkbox" />
+            <label key={tag} style={{ color: 'white', fontSize: '2rem', margin: 5}}>
+              <input style={{margin: 5}} name={tag} checked={this.state.selectedTags.indexOf(tag) > -1} value={tag} type="checkbox" onChange={this.handleInputChange} />
               {tag}
             </label>
           );
