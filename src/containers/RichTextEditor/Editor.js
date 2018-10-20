@@ -134,6 +134,7 @@ class Editor extends React.Component {
 								},
 								() => {
 									console.log(this.state.selectedTags);
+									console.log(this.quillRef.root.innerHTML);
 								}
 							);
 						}
@@ -170,13 +171,13 @@ class Editor extends React.Component {
     };
     //console.log(blog);
     axios.put("/blogs/blogs", { blog }).then(res => {
-      console.log(res.data);
+      //console.log(res.data);
       this.setState({ editorHtml: html });
     });
   }
 
   onTitleChange(e) {
-    console.log(e.target.value);
+    //console.log(e.target.value);
     let title = e.target.value;
     let blog = {
       id: this.state.blogId,
@@ -185,13 +186,13 @@ class Editor extends React.Component {
       delta_ops: this.quillRef.getContents().ops
     };
     axios.put("/blogs/blogs", { blog }).then(res => {
-      console.log(res.data);
+      //console.log(res.data);
       this.setState({ title: title });
     });
 	}
 	
 	handleInputChange(e) {
-		console.log(e.target.name);
+		//console.log(e.target.name);
 		let tag = e.target.name;
 		let selectedTags;
 		if (this.state.selectedTags.indexOf(tag) === -1) {
@@ -201,7 +202,7 @@ class Editor extends React.Component {
 			let indexToRemove = selectedTags.indexOf(tag);
 			selectedTags.splice(indexToRemove, 1);
 		}
-		console.log(selectedTags);
+		//console.log(selectedTags);
 		let blog = {
 			id: this.state.blogId,
 			title: this.state.title,
@@ -242,7 +243,7 @@ class Editor extends React.Component {
     }).then(response => {
       response.json().then(body => {
         //this.setState({ imageURL: `http://localhost:8000/${body.file}` });
-        console.log(body);
+        //console.log(body);
         this.insertToEditor(body.url);
         //insertToEditor(body.file);
       });
@@ -251,9 +252,9 @@ class Editor extends React.Component {
 
   insertToEditor(url) {
     // push image url to rich editor.
-    console.log(url);
+    //console.log(url);
     const range = this.quillRef.getSelection();
-    console.log(range);
+    //console.log(range);
     this.quillRef.insertEmbed(range.index, "image", url);
     this.quillRef.insertEmbed(range.index + 1, "code", "dsfsdf");
   }
@@ -273,11 +274,12 @@ class Editor extends React.Component {
 		console.log(this.quillRef.getSelection());
 		let blog = {
 			id: this.state.blogId,
-			data: Date.now(),
+			date: Date.now(),
 			title: this.state.title,
 			tags: this.state.selectedTags,
 			delta_ops: this.quillRef.getContents().ops
-		}
+    }
+    console.log(blog);
 		axios.put('/blogs/blogs', {blog}).then(res => {
 			console.log(res.data);
 			history.replace('/fashion');
