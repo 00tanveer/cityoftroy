@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import Button from "../Button";
 // Grid container
 const CardContainer = styled.div`
@@ -32,6 +34,7 @@ const CardContainer = styled.div`
     max-height: 520px;
     margin: 70px auto;
     .card_text {
+      max-width: 620px;
       height: 100%;
       margin: 0 30px;
       align-content: center;
@@ -43,6 +46,7 @@ const CardContainer = styled.div`
     .thumbnail {
       /* margin: 0 50px;
       align-content: center; */
+      overflow: hidden;
       div {
         img {
           width: 100%;
@@ -61,6 +65,13 @@ const TitleImage = styled.div`
 `;
 const Tags = styled.div`
   font-size: 2rem;
+  span {
+    a {
+      text-decoration: none;
+      color: white;
+      margin-right: 10px;
+    }
+  }
   //margin-bottom: 10px;
 `;
 const Title = styled.p`
@@ -72,9 +83,14 @@ const Meta = styled.div`
   font-family: cursive;
   //margin-bottom: 10px;
 `;
-const Excerpt = styled.p`
+const Excerpt = styled.div`
   font-size: 1.5rem;
   line-height: 1.4;
+  p {
+    img {
+      max-width: 50%;
+    }
+  }
 `;
 const ShareBar = styled.span`
   font-size: 2rem;
@@ -85,7 +101,41 @@ const ShareBar = styled.span`
 `;
 
 class Card extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    console.log(typeof this.props.blog.date);
+    let date = new Date(this.props.blog.date);
+    //console.log(typeof date);
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let locale = "en-us";
+    let month = date.toLocaleString(locale, { month: "long" });
+    //console.log(month);
+    date = month + ' ' + day + ', ' + year;
+
+    //convert delta ops to html
+    let deltaOps = this.props.blog.delta_ops;
+    let cfg = {};
+    let converter = new QuillDeltaToHtmlConverter(deltaOps, cfg);
+    let html = converter.convert();
+    console.log(html);
+    console.log(ReactHtmlParser(html));
+    let ExcerptText = ReactHtmlParser(html)[0].props.children[0].props.children[0];
+    console.log(ExcerptText);
+    console.log(typeof ExcerptText);
+    let titleImageLink;
+    ReactHtmlParser(html).map(obj => {
+      if (obj.type === 'p') {
+        obj.props.children.map(obj2 => {
+          if (obj2.type === 'img') {
+            titleImageLink = obj2.props.src;
+          }
+        })
+      }
+    })
     return (
       //<LayoutWrapper>
       <CardContainer>
@@ -93,20 +143,26 @@ class Card extends React.Component {
           <TitleImage>
             <img
               src={
-                //"https://2.bp.blogspot.com/-TJZnqUmbZnw/W24HZ2Gx0eI/AAAAAAAArGQ/ou2sE4dVvHontzMksOGSCehRp8UDP4x9gCLcBGAs/s1600/IMG_20180628_121913_HDR.jpg"
-                "https://scontent-amt2-1.cdninstagram.com/vp/c93ec8e1893cac67160f77e281f32cfa/5C5AD543/t51.2885-15/sh0.08/e35/c0.120.964.964/s640x640/40705774_283833208891041_1724639902372870603_n.jpg"
+                // "https://scontent-amt2-1.cdninstagram.com/vp/c93ec8e1893cac67160f77e281f32cfa/5C5AD543/t51.2885-15/sh0.08/e35/c0.120.964.964/s640x640/40705774_283833208891041_1724639902372870603_n.jpg"
+                titleImageLink
               }
             />
           </TitleImage>
         </div>
         <div className="card_text">
-          <Tags>Routine    Health</Tags>
-          <Title>How To Be A Morning Person</Title>
-          <Meta>October 3, 2018 5 minutes 32 comments</Meta>
+          <Tags>{
+            this.props.blog.tags.map((tag) => {
+              return(
+                <span><a href="#">{tag}</a>
+                </span>
+              )
+            })
+          }</Tags>
+          <Title>{this.props.blog.title}</Title>
+          <Meta><span>{date}</span></Meta>
           <Excerpt>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation
+          {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. */}
+            {ExcerptText}
           </Excerpt>
           <Button label="Read More" />
           <ShareBar>

@@ -48,7 +48,7 @@ class Landing extends React.Component {
           className="filler"
           // style={{ backgroundColor: "black", height: "100vh", width: "100vw" }}
         >
-          <Card />
+          {/* <Card /> */}
         </div>
         <Footer />
       </div>
