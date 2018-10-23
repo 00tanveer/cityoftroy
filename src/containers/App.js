@@ -41,7 +41,6 @@ class App extends Component {
         <Route exact strict path='/login' render={(props) => <RegisterOrLogin mode={'Login'} {...props} />} />
         <Route
           exact
-          strict
           path="/fashion"
           render={props => <Fashion {...props} />}
         />

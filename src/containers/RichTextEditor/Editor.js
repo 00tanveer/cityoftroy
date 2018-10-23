@@ -1,5 +1,6 @@
 import React from "react";
 import history from '../../history';
+import { withRouter } from 'react-router-dom';
 import ReactQuill from "react-quill";
 import axios from "axios";
 
@@ -81,17 +82,19 @@ const QuillContainer = styled.div`
 `;
 
 class Editor extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
+    const { match } = this.props;
+    //console.log(match.params.blogId);
     this.state = {
       editorHtml: "",
       mountedEditor: false,
-      blogId: "",
+      blogId: match.params.blogId,
       tags: [],
       selectedTags: [],
       title: ""
     }; // You can also pass a Quill Delta here
-    //console.log(props.match.path);
+    console.log(this.state.blogId);
     this.quillRef = null;
     this.reactQuillRef = null;
     this.handleChange = this.handleChange.bind(this);
@@ -112,9 +115,10 @@ class Editor extends React.Component {
   //LIFECYCLE HOOKS
   componentDidMount() {
     this.attachQuillRefs();
-
-    axios.get("/blogs/blogs/tags").then(res => {
+    //console.log('componentDidMount');
+    axios.get("/blogs/tags").then(res => {
       let tags = [];
+      //console.log(res.data.data);
       tags = res.data.data.map(tag => {
         return tag.name;
       });
@@ -123,19 +127,21 @@ class Editor extends React.Component {
           tags: tags
         },
         () => {
-          axios.get("/blogs/blogs").then(res => {
-            console.log(res.data.data);
+          //console.log(this.state.blogId);
+          let path = '/blogs/' + this.state.blogId;
+          axios.get(path).then(res => {
+            //console.log(res.data.data);
             if (res.data.data.length !== 0) {
-              this.quillRef.setContents(res.data.data[0].delta_ops);
+              this.quillRef.setContents(res.data.data.docs[0].delta_ops);
               this.setState(
                 {
-                  blogId: res.data.data[0]._id,
-                  title: res.data.data[0].title,
-                  selectedTags: res.data.data[0].tags
+                  blogId: res.data.data.docs[0]._id,
+                  title: res.data.data.docs[0].title,
+                  selectedTags: res.data.data.docs[0].tags
                 },
                 () => {
-                  console.log(this.state.selectedTags);
-                  console.log(this.quillRef.root.innerHTML);
+                  //console.log(this.state.selectedTags);
+                  //console.log(this.quillRef.root.innerHTML);
                 }
               );
             }
@@ -171,7 +177,7 @@ class Editor extends React.Component {
       delta_ops: this.quillRef.getContents().ops
     };
     //console.log(blog);
-    axios.put("/blogs/blogs", { blog }).then(res => {
+    axios.put("/blogs/update", { blog }).then(res => {
       //console.log(res.data);
       this.setState({ editorHtml: html });
     });
@@ -186,7 +192,7 @@ class Editor extends React.Component {
       tags: this.state.selectedTags,
       delta_ops: this.quillRef.getContents().ops
     };
-    axios.put("/blogs/blogs", { blog }).then(res => {
+    axios.put("/blogs/update", { blog }).then(res => {
       //console.log(res.data);
       this.setState({ title: title });
     });
@@ -210,7 +216,7 @@ class Editor extends React.Component {
       tags: selectedTags,
       delta_ops: this.quillRef.getContents().ops
     }
-    axios.put('/blogs/blogs', { blog }).then(res => {
+    axios.put('/blogs/update', { blog }).then(res => {
       this.setState({ selectedTags: selectedTags }, () => console.log(this.state.selectedTags));
     })
   }
@@ -238,7 +244,7 @@ class Editor extends React.Component {
     // for (var key of data.entries()) {
     //     console.log(key[0] + ', ' + key[1]);
     // }
-    fetch("/blogs/blogs/uploadPicture", {
+    fetch("/blogs/uploadPicture", {
       method: "POST",
       body: data
     }).then(response => {
@@ -281,7 +287,7 @@ class Editor extends React.Component {
       delta_ops: this.quillRef.getContents().ops
     }
     console.log(blog);
-    axios.put('/blogs/blogs', { blog }).then(res => {
+    axios.put('/blogs/update', { blog }).then(res => {
       console.log(res.data);
       history.replace('/fashion');
     })
@@ -303,7 +309,7 @@ class Editor extends React.Component {
     if (this.state.tags.length > 0) {
       Tags = <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20, marginBottom: 40 }}>
         {this.state.tags.map(tag => {
-          console.log(tag);
+          //console.log(tag);
           return (
             <label key={tag} style={{ color: 'white', fontSize: '2rem', margin: 5 }}>
               <input style={{ margin: 5 }} name={tag} checked={this.state.selectedTags.indexOf(tag) > -1} value={tag} type="checkbox" onChange={this.handleInputChange} />
@@ -398,4 +404,4 @@ Editor.formats = [
   "background"
 ];
 
-export default withAuth(Editor);
+export default withAuth(withRouter(Editor));

@@ -1,4 +1,5 @@
 import React from "react";
+import history from '../../history';
 import axios from 'axios';
 import _ from 'lodash';
 import styled from 'styled-components';
@@ -20,15 +21,24 @@ class Fashion extends React.Component {
     this.state = {
       blogs: []
     }
+    this.postButtonHandler = this.postButtonHandler.bind(this);
   }
 
   componentDidMount() {
-    axios.get('/blogs/blogs').then(res => {
+    axios.get('/blogs/all').then(res => {
       if (res.data.data.length !== 0) {
         this.setState({
           blogs: res.data.data
         }, () => console.log(this.state.blogs))
       }
+    })
+  }
+
+  postButtonHandler() {
+    axios.post('/blogs/create').then(res => {
+      console.log(res.data);
+      let blogId = res.data.data._id;
+      history.replace(`/fashion/post/${blogId.toString()}`);
     })
   }
 
@@ -48,7 +58,7 @@ class Fashion extends React.Component {
         {
           auth.loggedIn() ?
             <div className="post-button">
-              <Button className="post-button" label="POST" />
+              <Button className="post-button" clickHandler={this.postButtonHandler} label="POST" />
             </div> : null
         }
         {/* <div className="post-button">
