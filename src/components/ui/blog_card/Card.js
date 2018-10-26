@@ -112,7 +112,7 @@ class Card extends React.Component {
   onCardClick() {
     let hyphenatedTitle = this.props.blog.title.split(' ').join('-');
     console.log(hyphenatedTitle);
-    history.push(`/fashion/${hyphenatedTitle}`);
+    history.push(`/fashion/${hyphenatedTitle}-${this.props.blog._id}`);
   }
 
   render() {
