@@ -50,6 +50,12 @@ class App extends Component {
           path="/fashion/post/:blogId"
           render={props => <Editor genre={"fashion"} auth={auth} {...props} />}
         />
+        <Route
+          exact
+          strict
+          path="/fashion/:title"
+          render={props => <Article {...props} />}
+        />
       </div>
     );
   }
