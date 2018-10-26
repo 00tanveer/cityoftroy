@@ -1,5 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+import Header from '../../components/ui/header/Header';
+import Footer from '../../components/ui/footer/Footer';
+const StyledContainer = styled.div`
+margin-bottom: 80px;
+`;
 
 class Article extends React.Component {
 	constructor(props) {
@@ -23,7 +29,10 @@ class Article extends React.Component {
 
 	render() {
 		return(
-			<div>Hello</div>
+			<StyledContainer>
+				<Header />
+				<Footer />
+			</StyledContainer>
 		);
 	}
 }
