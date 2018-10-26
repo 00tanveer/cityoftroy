@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Landing from "./pages/Landing";
+import Article from './pages/Article';
 import Fashion from "./pages/Fashion";
 import Beauty from './pages/Beauty';
 import Art from './pages/Art';
