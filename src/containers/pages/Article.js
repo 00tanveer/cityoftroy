@@ -15,7 +15,22 @@ const StyledContainer = styled.div`
 const Title = styled.p`
 	font-size: 6rem;
 	text-align: center;
-	margin-top: 90px;
+	margin-top: 140px;;
+`;
+
+const Meta = styled.div`
+	font-size: 1.7rem;
+	text-align: center;
+	font-family: cursive;
+	margin-top: 15px;
+`;
+
+const Body = styled.div`
+	.quill {
+		.ql-container {
+			border: none;
+		}
+	}
 `;
 
 class Article extends React.Component {
@@ -58,6 +73,7 @@ class Article extends React.Component {
 	};
 
 	render() {
+
 		let date = new Date(this.state.blog.date);
     let day = date.getDate();
     let year = date.getFullYear();
@@ -81,13 +97,16 @@ class Article extends React.Component {
 				<Header />
 				<Title>{this.state.blog.title}</Title>
 				{/* {ArticleBody} */}
-				<ReactQuill 
-					ref={el => {
-						this.reactQuillRef = el;
-					}}
-					modules={modules}
-					defaultValue={this.state.editorHtml}
-				/>
+				<Meta><span>{date}</span></Meta>
+				<Body>
+					<ReactQuill 
+						ref={el => {
+							this.reactQuillRef = el;
+						}}
+						modules={modules}
+						defaultValue={this.state.editorHtml}
+					/>
+				</Body>
 				<Footer />
 			</StyledContainer>
 		);
