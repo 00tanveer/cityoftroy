@@ -186,7 +186,12 @@ class Card extends React.Component {
     let cfg = {};
     let converter = new QuillDeltaToHtmlConverter(deltaOps, cfg);
     let html = converter.convert();
-    let ExcerptText = ReactHtmlParser(html)[0].props.children[0];
+    let ExcerptText;
+    if (!ReactHtmlParser(html)[0]) {
+      ExcerptText = '<Nothing written yet>';
+    } else {
+      ExcerptText = ReactHtmlParser(html)[0].props.children[0];
+    }
     let titleImageLink;
     ReactHtmlParser(html).map(obj => {
       if (obj.type === 'p') {
