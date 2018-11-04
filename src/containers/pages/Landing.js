@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../../components/ui/header/Header";
 import Footer from "../../components/ui/footer/Footer";
 import Carousel from "../../components/ui/carousel/Carousel";
-import Box from "../../components/ui/subscription_box/Box";
+import Box from "../../components/ui/boxes/SubscriptionBox";
 
 var slides = [
   "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?fit=crop&fm=jpg&h=825&q=80&w=1325",

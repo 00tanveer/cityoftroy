@@ -4,8 +4,8 @@ import axios from 'axios';
 import Plx from "react-plx";
 import theme from "../../../styles/theme";
 
-import Underline from "../../../components/ui/Underline";
-import Button from "../../../components/ui/Button";
+import Underline from "../Underline";
+import Button from "../Button";
 
 const StyledBox = styled.div`
   padding: 0 40px;
