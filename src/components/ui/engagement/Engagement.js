@@ -11,7 +11,7 @@ const StyledContainer = styled.div`
 		padding: 5px 9px;
 		background-color: ${theme.maroon};
 		border: 1px solid ${theme.white};
-		border-radius: 10px;
+		//border-radius: 10px;
 		transition: all 200ms ease-in;
 		&:hover {
 			background-color: ${theme.black};
